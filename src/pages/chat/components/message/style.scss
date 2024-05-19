@@ -1,0 +1,18 @@
+.message {
+    width: 100%;
+    &__sender {
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 21px;
+        letter-spacing: 0%;
+        text-align: left;
+    }
+    &__body {
+        margin-top: 10px;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 155%;
+        letter-spacing: 0%;
+        text-align: justify;
+    }
+}

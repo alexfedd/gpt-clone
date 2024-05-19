@@ -1,0 +1,32 @@
+.chat {
+    width: 100%;
+    overflow-y: scroll;
+    &__container {
+        max-width: 768px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+    &__messages {
+        position: relative;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+        margin: 0 auto 138px;
+        max-width: 708px;
+    }
+    &__text-input-wrapper {
+        position: fixed;
+        bottom: 0;
+        left: 260px;
+        right: 15px;
+    }
+    &__text-input {
+        max-width: 768px;
+        margin: 0 auto;
+        padding-bottom: 32px;
+        background-color: #212121;
+    }
+}

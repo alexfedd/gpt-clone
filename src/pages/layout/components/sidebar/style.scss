@@ -1,0 +1,117 @@
+.sidebar {
+  flex: 0 0 260px;
+  padding: 25px 20px;
+  background-color: #171717;
+  display: flex;
+  flex-direction: column;
+  &__body {
+    flex: 1 1 auto;
+  }
+  &__items {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &__item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 5px 10px 0;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    &--active {
+      background-color: #212121;
+      padding: 10px 5px;
+      .sidebar__delete-btn {
+        opacity: 1;
+      }
+    }
+    @media (hover: hover) {
+      &:hover {
+        background-color: #212121;
+        padding: 10px 5px;
+        .sidebar__delete-btn {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &__item-title {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0%;
+    text-align: left;
+  }
+  &__delete-btn {
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    opacity: 0;
+    border-radius: 50%;
+    @media (hover: hover) {
+      &:hover {
+        transform: scale(1.1);
+        background-color: #424242;
+      }
+    }
+  }
+  &__delete-btn-image {
+    width: 20px;
+    height: 20px;
+  }
+  &__user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+  &__user-name {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0%;
+    text-align: left;
+  }
+  &__user-pfp {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+}
+.create-btn {
+  padding: 10px 5px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -10px;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+    background-color: #212121;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    opacity: 0;
+  }
+  @media (hover: hover) {
+    &:hover {
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+  &__span {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0%;
+    text-align: left;
+  }
+}
