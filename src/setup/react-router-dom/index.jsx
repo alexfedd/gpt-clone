@@ -3,11 +3,12 @@ import SignIn from "../../pages/sign-in/SignIn";
 import Layout from "../../pages/layout/Layout";
 import SignUp from "../../pages/sign-up/SignUp";
 import Chat from "../../pages/chat/Chat";
-
+import { loader as layoutLoader   } from "../../pages/layout/Layout";
 export const router = createHashRouter([
   {
     path: "/",
     element: <Layout />,
+    loader: layoutLoader,
     children: [
       {
         index: true,

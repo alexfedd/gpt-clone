@@ -12,15 +12,18 @@ function SignUp() {
     setError,
     formState: { errors },
   } = useForm({ resolver: yupResolver(registrationSchema) });
-  const useSignUp = useSignUpMutation(setError)
+  const useSignUp = useSignUpMutation(setError);
   const onSubmit = async (data) => {
-    await useSignUp.mutateAsync(data)
-  }
+    await useSignUp.mutateAsync(data);
+  };
   return (
     <div className="container container__sign-container">
       <div className="form-wrapper">
         <h1 className="form-wrapper__title">Создать аккаунт</h1>
-        <form className="form-wrapper__form sign-form" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="form-wrapper__form sign-form"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <input
             type="email"
             className="sign-form__input input"
@@ -28,6 +31,15 @@ function SignUp() {
             {...register("email")}
           />
           {errors.email && <ErrorMessage errorMessage={errors.email.message} />}
+          <input
+            type="text"
+            className="sign-form__input input"
+            placeholder="Username"
+            {...register("username")}
+          />
+          {errors.username && (
+            <ErrorMessage errorMessage={errors.username.message} />
+          )}
           <input
             type="password"
             className="sign-form__input input"
@@ -37,15 +49,6 @@ function SignUp() {
           {errors.password && (
             <ErrorMessage errorMessage={errors.password.message} />
           )}
-          <input
-            type="password"
-            className="sign-form__input input"
-            placeholder="Подтверждение пароля"
-            {...register("confirmPassword")}
-          />
-          {errors.confirmPassword && (
-            <ErrorMessage errorMessage={errors.confirmPassword.message} />
-          )}
           <div className="sign-form__sign-option">
             <span className="sign-form__span">Уже есть аккаунт?</span>
             <Link className="sign-form__link" to={"/sign-in"}>
@@ -54,7 +57,7 @@ function SignUp() {
           </div>
           {errors.root && <ErrorMessage errorMessage={errors.root.message} />}
           <button type="submit" className="sign-form__button">
-            Зарегистрироваться
+            {useSignUp.isPending ? "Регистрируемся..." : "Зарегистрироваться"}
           </button>
         </form>
       </div>

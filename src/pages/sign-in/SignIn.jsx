@@ -24,10 +24,10 @@ function SignIn() {
           <input
             type="text"
             className="sign-form__input input"
-            placeholder="Email"
-            {...register("email")}
+            placeholder="Username"
+            {...register("username")}
           />
-          {errors.email && <ErrorMessage errorMessage={errors.email.message} />}
+          {errors.username && <ErrorMessage errorMessage={errors.username.message} />}
           <input
             type="password"
             className="sign-form__input input"

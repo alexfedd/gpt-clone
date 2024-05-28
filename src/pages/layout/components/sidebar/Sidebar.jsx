@@ -3,7 +3,16 @@ import createBtn from "../../../../assets/svg/create_chat.svg";
 import deleteBtn from "../../../../assets/svg/delete_chat.svg";
 import userPfp from '../../../../assets/svg/default_pfp.svg'
 import './style.scss'
+import { getCookieByName } from "../../../../common/utils";
+import { useGetChats } from "./hooks/useGetChats";
 function Sidebar() {
+  const currentUser = JSON.parse(getCookieByName('user'))
+  const {data: chatsData, isPending, error} = useGetChats();
+  console.log(error);
+  if(!isPending) {
+    console.log(chatsData);
+  }
+  console.log(currentUser);
   return (
     <div className="sidebar">
       <div className="sidebar__body">
@@ -46,7 +55,7 @@ function Sidebar() {
       </div>
       <div className="sidebar__user-info">
           <img src={userPfp} alt="" className="sidebar__user-pfp" />
-          <span className="sidebar__user-name">User email</span>
+          <span className="sidebar__user-name">{currentUser.username}</span>
         </div>
     </div>
   );
