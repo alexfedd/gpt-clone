@@ -4,7 +4,8 @@ import "./style.scss";
 import { getCookieByName } from "../../common/utils";
 
 export const loader = () => {
-  if (!getCookieByName("user")) {
+
+  if (getCookieByName("user") === '{}') {
     return redirect("/sign-in");
   }
   return null

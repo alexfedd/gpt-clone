@@ -1,6 +1,7 @@
 .sidebar {
   flex: 0 0 260px;
   padding: 25px 20px;
+  height: 100%;
   background-color: #171717;
   display: flex;
   flex-direction: column;
@@ -12,6 +13,13 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-height: calc(100vh - 189px);
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 0;
+      display: none;
+    }
+    scrollbar-width: 0;
   }
   &__item {
     display: flex;

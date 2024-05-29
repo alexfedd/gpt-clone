@@ -4,6 +4,7 @@ import Layout from "../../pages/layout/Layout";
 import SignUp from "../../pages/sign-up/SignUp";
 import Chat from "../../pages/chat/Chat";
 import { loader as layoutLoader   } from "../../pages/layout/Layout";
+import NoChat from "../../pages/layout/components/noChat/NoChat";
 export const router = createHashRouter([
   {
     path: "/",
@@ -12,7 +13,7 @@ export const router = createHashRouter([
     children: [
       {
         index: true,
-        element: <Chat />
+        element: <NoChat />
       },
       {
         path: '/c/:chatId',

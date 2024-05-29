@@ -6,5 +6,5 @@ export function getCookieByName(name) {
       return parts[1];
     }
   }
-  return undefined;
+  return '{}';
 }
