@@ -32,17 +32,11 @@
     &--active {
       background-color: #212121;
       padding: 10px 5px;
-      .sidebar__delete-btn {
-        opacity: 1;
-      }
     }
     @media (hover: hover) {
       &:hover {
         background-color: #212121;
         padding: 10px 5px;
-        .sidebar__delete-btn {
-          opacity: 1;
-        }
       }
     }
   }
@@ -53,9 +47,8 @@
     letter-spacing: 0%;
     text-align: left;
   }
-  &__delete-btn {
+  &__chat-btn {
     transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-    opacity: 0;
     border-radius: 50%;
     @media (hover: hover) {
       &:hover {
@@ -64,9 +57,9 @@
       }
     }
   }
-  &__delete-btn-image {
-    width: 20px;
-    height: 20px;
+  &_chat-btn-image {
+    width: 24px;
+    height: 24px;
   }
   &__user-info {
     display: flex;

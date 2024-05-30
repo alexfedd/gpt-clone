@@ -1,17 +1,21 @@
-import { NavLink } from "react-router-dom";
 import createBtn from "../../../../assets/svg/create_chat.svg";
-import deleteBtn from "../../../../assets/svg/delete_chat.svg";
 import userPfp from "../../../../assets/svg/default_pfp.svg";
 import "./style.scss";
 import { getCookieByName } from "../../../../common/utils";
 import { useGetChats } from "./hooks/useGetChats";
 import { useCreateChatMutation } from "./hooks/useCreateChatMutation";
+import ChatLink from "./chatLink/ChatLink";
+import { useEffect, useState } from "react";
 function Sidebar() {
   const currentUser = JSON.parse(getCookieByName("user"));
   const { data: chatsData, isPending, error } = useGetChats();
-  const useCreateChat = useCreateChatMutation();
+  const [chatList, setChatList] = useState()
+  useEffect(() => {
+    setChatList(chatsData?.data)
+  }, [chatsData])
   const onCreateChat = () => {
-    useCreateChat.mutate();
+    setChatList((prev) => [...prev, {topicName: 'Новый чат', isNewChat: true}])
+    console.log(chatList);
   };
   return (
     <div className="sidebar">
@@ -21,21 +25,12 @@ function Sidebar() {
           <img src={createBtn} alt="" className="create-btn__image" />
         </button>
         <div className="sidebar__items">
-          {chatsData?.data.length === 0 ? (
+          {chatList?.length === 0 ? (
             <span>Нет чатов</span>
           ) : (
-            chatsData?.data.map((chat) => {
+            chatList?.map((chat, id) => {
               return (
-                <NavLink key={chat.id} to={`/c/${chat.id}`} className="sidebar__item">
-                  <div className="sidebar__item-title">{chat.topicName}</div>
-                  <button className="sidebar__delete-btn">
-                    <img
-                      src={deleteBtn}
-                      alt=""
-                      className="sidebar__delete-btn-image"
-                    />
-                  </button>
-                </NavLink>
+                <ChatLink key={id} chat={chat} isNewChat={chat?.isNewChat}/>
               );
             })
           )}

@@ -2,9 +2,13 @@ import { useEffect, useRef } from "react";
 import sendBtn from "../../../../assets/svg/send_message.svg";
 import "./style.scss";
 import { useForm } from "react-hook-form";
+import { useSendMessageMutation } from "./hooks/useSendMessageMutation";
+import { useParams } from "react-router-dom";
 
 function TextInput({ messagesRef, bottomRef, addNewMessage }) {
-  const { handleSubmit, register, trigger, reset, watch } = useForm();
+  const { handleSubmit, register, trigger, reset } = useForm();
+  const { chatId } = useParams();
+  const sendMessage = useSendMessageMutation(chatId);
   const handleChange = (event) => {
     event.target.style.height = "auto";
     event.target.style.height = `${event.target.scrollHeight}px`;
@@ -13,10 +17,11 @@ function TextInput({ messagesRef, bottomRef, addNewMessage }) {
     }px`;
     bottomRef.current.scrollIntoView();
   };
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     addNewMessage((prev) => [
       ...prev,
-      { sender: "Запрос", message: data.message },
+      { senderId: 1, contents: data.message },
+      { senderId: 0, contents: "Печатает..." },
     ]);
     reset();
     const textArea = document.querySelector(".text-input__input");
@@ -24,7 +29,16 @@ function TextInput({ messagesRef, bottomRef, addNewMessage }) {
       textArea.style.height = "auto";
       messagesRef.current.style = `margin-bottom: ${84 + 56}px`;
     }
+    await sendMessage.mutateAsync(data.message);
   };
+  useEffect(() => {
+    if (sendMessage.isError) {
+      addNewMessage((prev) => [
+        ...prev.slice(0, -1),
+        { senderId: 0, contents: "Произошла ошибка. Попробуйте позже." },
+      ]);
+    }
+  }, [sendMessage.isError]);
   return (
     <form className="text-input" onSubmit={handleSubmit(onSubmit)}>
       <textarea
@@ -38,7 +52,11 @@ function TextInput({ messagesRef, bottomRef, addNewMessage }) {
           handleChange(e);
         }}
       ></textarea>
-      <button type="submit" className="text-input__button">
+      <button
+        disabled={sendMessage.isPending}
+        type="submit"
+        className="text-input__button"
+      >
         <img src={sendBtn} alt="" className="text-input__image" />
       </button>
     </form>

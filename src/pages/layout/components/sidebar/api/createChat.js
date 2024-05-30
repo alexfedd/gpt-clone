@@ -6,11 +6,11 @@ const axCreateChat = axios.create({
   baseURL: "http://localhost:8081/",
 });
 
-export async function createChat() {
+export async function createChat(chatName) {
   const user = JSON.parse(getCookieByName("user"));
   console.log("EXECUTING");
   await axAuthInstance.post("/api/v1/create/topic", {
     user_id: user.id,
-    topicName: "Новый чат",
+    topicName: chatName,
   });
 }

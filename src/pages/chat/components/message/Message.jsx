@@ -1,10 +1,10 @@
 import './style.scss'
 
 
-function Message({ sender, message }) {
+function Message({ senderId, message, username }) {
   return (
     <div className="message">
-      <span className="message__sender">{sender}</span>
+      <span className="message__sender">{senderId === 0 ? 'MireaGPT' : username}</span>
       <p className="message__body">{message}</p>
     </div>
   );

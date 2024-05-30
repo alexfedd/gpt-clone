@@ -4,8 +4,8 @@ import { createChat } from "../api/createChat";
 export function useCreateChatMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => createChat(),
-    onSuccess: () => {
+    mutationFn: (chatName) => createChat(chatName),
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["chats"] });
     },
   });
