@@ -7,10 +7,18 @@ const axCreateChat = axios.create({
 });
 
 export async function createChat(chatName) {
-  const user = JSON.parse(getCookieByName("user"));
+  const userData = JSON.parse(getCookieByName("user"));
   console.log("EXECUTING");
-  await axAuthInstance.post("/api/v1/create/topic", {
-    user_id: user.id,
-    topicName: chatName,
-  });
+  await axAuthInstance.post(
+    "/api/v1/create/topic",
+    {
+      user_id: userData.id,
+      topicName: chatName,
+    },
+    {
+      headers: {
+        Authorization: `${userData.tokenType} ${userData.accessToken}`,
+      },
+    }
+  );
 }

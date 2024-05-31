@@ -11,8 +11,9 @@ function Chat() {
   const username = JSON.parse(getCookieByName('user')).username
   const bottomRef = useRef(0);
   const {chatId} = useParams()
-  const {data: chatMessages} = useGetMessagesByChatID(chatId)
+  const {data: chatMessages, error, isPending} = useGetMessagesByChatID(chatId)
   const [messagesList, setMessagesList] = useState()
+  console.log(messagesList, chatMessages, error, isPending);
   useEffect(() => {
     setMessagesList(chatMessages?.data)
     bottomRef.current.scrollIntoView();

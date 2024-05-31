@@ -18,11 +18,14 @@ function TextInput({ messagesRef, bottomRef, addNewMessage }) {
     bottomRef.current.scrollIntoView();
   };
   const onSubmit = async (data) => {
-    addNewMessage((prev) => [
-      ...prev,
-      { senderId: 1, contents: data.message },
-      { senderId: 0, contents: "Печатает..." },
-    ]);
+    addNewMessage((prev) => {
+      console.log(prev);
+      return [
+        ...prev,
+        { senderId: 1, contents: data.message },
+        { senderId: 0, contents: "Печатает..." },
+      ]
+    });
     reset();
     const textArea = document.querySelector(".text-input__input");
     if (textArea) {
@@ -33,10 +36,13 @@ function TextInput({ messagesRef, bottomRef, addNewMessage }) {
   };
   useEffect(() => {
     if (sendMessage.isError) {
-      addNewMessage((prev) => [
-        ...prev.slice(0, -1),
-        { senderId: 0, contents: "Произошла ошибка. Попробуйте позже." },
-      ]);
+      addNewMessage((prev) => {
+        console.log(prev);
+        return [
+          ...prev.slice(0, -1),
+          { senderId: 0, contents: "Произошла ошибка. Попробуйте позже." },
+        ]
+      });
     }
   }, [sendMessage.isError]);
   return (
