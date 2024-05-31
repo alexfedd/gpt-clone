@@ -15,7 +15,6 @@ function Sidebar() {
   }, [chatsData])
   const onCreateChat = () => {
     setChatList((prev) => [...prev, {topicName: 'Новый чат', isNewChat: true}])
-    console.log(chatList);
   };
   return (
     <div className="sidebar">
